@@ -106,7 +106,7 @@ def User_Control():
         wait(20, TimeUnits.MSEC)  # Small delay for smoother updates
 
         if LeftJoy & RightJoy == 0:
-            wait(10, SECONDS)
+            wait(5, SECONDS)
             break
 
 

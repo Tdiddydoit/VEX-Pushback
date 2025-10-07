@@ -13,15 +13,15 @@ https://github.com/VEX-Robotics-AI/Python-V5/blob/master/basic-motion-commented.
 
 General Tips:
 
-Pressing CTR and clicking in vs will allow you to view the function and its argruments in an example in VS code
-Just because there are no erros in the IDE does not mean your code will work on the bot so test, or have someone else test
-Find other githubs where this stuff has been done already reinventing the wheel will take a while
-Make sure to open the folder and not the file when using VS code so your vex libary import works
-When coping from V5 to visual studio sometimes extra code will be added at the top so watch for that
-Over comment your code others and judges will be veiwing it so try to put it in plain english
+1. Pressing CTR and clicking in vs will allow you to view the function and its argruments in an example in VS code
+2. Just because there are no erros in the IDE does not mean your code will work on the bot so test, or have someone else test
+3. Find other githubs where this stuff has been done already reinventing the wheel will take a while
+4. Make sure to open the folder and not the file when using VS code so your vex libary import works
+5. When coping from V5 to visual studio sometimes extra code will be added at the top so watch for that
+6. Over comment your code others and judges will be veiwing it so try to put it in plain english
 
 Code Tips:
 
-Use MotorGroup(Motor1, Motor2) to pass two motors as one when needed
-Controller joystick postion can be passed as a interger in motor power and display or elsewhere
-You may have to set a class premade or not into a varaiable then use the dot function to accesss the whole thing
+1. Use MotorGroup(Motor1, Motor2) to pass two motors as one when needed
+2. Controller joystick postion can be passed as a interger in motor power and display or elsewhere
+3. You may have to set a class premade or not into a varaiable then use the dot function to accesss the whole thing

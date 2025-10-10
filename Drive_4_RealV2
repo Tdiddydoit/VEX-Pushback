@@ -1,0 +1,78 @@
+from vex import *
+
+brain = Brain()
+controller = Controller()
+
+
+def Drive():
+    # Initialize all drivetrain motors
+    motor1 = Motor(Ports.PORT10, GearSetting.RATIO_18_1, False)
+    motor2 = Motor(Ports.PORT1, GearSetting.RATIO_18_1, True)
+    motor3 = Motor(Ports.PORT11, GearSetting.RATIO_18_1, True)
+    motor4 = Motor(Ports.PORT20, GearSetting.RATIO_18_1, False)
+
+    # Left and right motor groups
+    left_side = MotorGroup(motor1, motor4)
+    right_side = MotorGroup(motor2, motor3)
+
+    return [left_side, right_side]
+
+
+def tank_drive(left_group, right_group, deadzone=5):
+    
+    while True:
+        # Read joystick positions (axis3 = left vertical, axis2 = right vertical)
+        left_joy = controller.axis3.position()
+        right_joy = controller.axis2.position()
+
+        # Apply deadzone
+        if abs(left_joy) <= deadzone:
+            left_joy = 0
+        if abs(right_joy) <= deadzone:
+            right_joy = 0
+
+        # Set velocities (use absolute because direction given by spin)
+        left_group.set_velocity(abs(left_joy), VelocityUnits.PERCENT)
+        right_group.set_velocity(abs(right_joy), VelocityUnits.PERCENT)
+
+        # Spin left group
+        if left_joy > 0:
+            left_group.spin(FORWARD)
+        elif left_joy < 0:
+            left_group.spin(REVERSE)
+        else:
+            left_group.stop(BrakeType.COAST)
+
+        # Spin right group
+        if right_joy > 0:
+            right_group.spin(FORWARD)
+        elif right_joy < 0:
+            right_group.spin(REVERSE)
+        else:
+            right_group.stop(BrakeType.COAST)
+
+        # Display joystick values on brain screen (line 2, collum 1)
+        brain.screen.set_cursor(2, 1)
+        brain.screen.print("L: ", left_joy, "  R: ", right_joy, "   ")
+
+        # Small delay to avoid input lag
+        wait(20, TimeUnits.MSEC)
+        
+
+
+def UserControl():
+    # Get motor groups from Drive 
+    motor_list = Drive()
+    left_side = motor_list[0]
+    right_side = motor_list[1]
+
+    tank_drive(left_side, right_side)
+
+
+
+if __name__ == "__main__":
+    def main():
+        UserControl()
+        brain.program_stop()
+
+    main()
